@@ -19,9 +19,8 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity<LoginVO> login(@RequestBody LoginDTO loginDTO) {
-        loginService.login(loginDTO);
         return ResponseEntity.ok(LoginVO.builder()
-                .cpf(loginDTO.getCpf())
+                .user(loginService.login(loginDTO))
                 .build());
     }
 

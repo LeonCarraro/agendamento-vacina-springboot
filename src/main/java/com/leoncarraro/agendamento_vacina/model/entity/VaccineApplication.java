@@ -1,5 +1,6 @@
 package com.leoncarraro.agendamento_vacina.model.entity;
 
+import com.leoncarraro.agendamento_vacina.model.enumeration.Status;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,6 +30,9 @@ public class VaccineApplication {
 
     @OneToOne
     private User user;
+
+    @Enumerated(EnumType.ORDINAL)
+    private Status isActive;
 
     @Override
     public boolean equals(Object o) {

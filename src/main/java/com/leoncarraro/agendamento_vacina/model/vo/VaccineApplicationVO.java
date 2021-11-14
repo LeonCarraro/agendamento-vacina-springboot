@@ -9,7 +9,7 @@ import lombok.Setter;
 @Builder
 public class VaccineApplicationVO {
 
-    private String cpf;
+    private Long userId;
     private Integer groupId;
     private Integer healthPostId;
     private Integer scheduleId;

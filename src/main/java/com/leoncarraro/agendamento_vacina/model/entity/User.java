@@ -1,5 +1,8 @@
 package com.leoncarraro.agendamento_vacina.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.leoncarraro.agendamento_vacina.model.enumeration.Status;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,6 +24,17 @@ public class User {
     private LocalDate birthDate;
     private String email;
     private String password;
+
+    @OneToOne(mappedBy = "user")
+    @JsonIgnore
+    private VaccineApplication vaccineApplication;
+
+    @JsonProperty("hasSchedule")
+    public boolean hasSchedule() {
+        return vaccineApplication != null &&
+               vaccineApplication.getId() != null &&
+               vaccineApplication.getIsActive().equals(Status.ATIVO);
+    }
 
     @Override
     public boolean equals(Object o) {

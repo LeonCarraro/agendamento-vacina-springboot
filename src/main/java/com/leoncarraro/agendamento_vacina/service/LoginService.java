@@ -14,17 +14,19 @@ public class LoginService {
 
     private final UserRepository userRepository;
 
-    public void login(LoginDTO loginDTO) {
-        validateAccount(loginDTO);
+    public User login(LoginDTO loginDTO) {
+        return validateAccount(loginDTO);
     }
 
-    private void validateAccount(LoginDTO loginDTO) {
+    private User validateAccount(LoginDTO loginDTO) {
         User user = userRepository.findByCpf(loginDTO.getCpf())
                 .orElseThrow(() -> new UserNotFoundException("CPF não cadastrado!"));
 
         if (!user.getPassword().equals(loginDTO.getPassword())) {
             throw new LoginException("CPF ou senha inválido!");
         }
+
+        return user;
     }
 
 }
